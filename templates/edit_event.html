@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+
+<h3 class="mb-4">Edit Event</h3>
+
+{% if error %}
+<div class="alert alert-danger"><strong>{{ error }}</strong></div>
+{% endif %}
+
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Event Title</label>
+        <input type="text" name="title" class="form-control"
+               value="{{ event.title }}" required>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">Start Time</label>
+        <input type="datetime-local" name="start_time" class="form-control"
+               value="{{ event.start_time|replace(' ', 'T') }}" required>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label">End Time</label>
+        <input type="datetime-local" name="end_time" class="form-control"
+               value="{{ event.end_time|replace(' ', 'T') }}" required>
+    </div>
+
+    <div class="col-md-12">
+        <label class="form-label">Description</label>
+        <textarea name="description" class="form-control"
+                  rows="3">{{ event.description }}</textarea>
+    </div>
+
+    <div class="col-md-3">
+        <button class="btn btn-primary w-100">Update Event</button>
+    </div>
+</form>
+
+{% endblock %}

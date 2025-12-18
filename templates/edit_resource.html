@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Resource{% endblock %}
+
+{% block content %}
+
+<h3 class="mb-4">Edit Resource</h3>
+
+<form method="post" class="row g-3">
+    <div class="col-md-5">
+        <label class="form-label">Resource Name</label>
+        <input
+            type="text"
+            name="resource_name"
+            class="form-control"
+            value="{{ resource.resource_name }}"
+            required
+        >
+    </div>
+
+    <div class="col-md-5">
+        <label class="form-label">Resource Type</label>
+        <input
+            type="text"
+            name="resource_type"
+            class="form-control"
+            value="{{ resource.resource_type }}"
+            required
+        >
+    </div>
+
+    <div class="col-md-2 align-self-end">
+        <button class="btn btn-primary w-100">
+            Update
+        </button>
+    </div>
+</form>
+
+{% endblock %}

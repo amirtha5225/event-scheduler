@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Resources{% endblock %}
+
+{% block content %}
+
+<h3 class="mb-4">Add Resource</h3>
+
+<form method="post" class="row g-3 mb-5">
+    <div class="col-md-5">
+        <input
+            type="text"
+            name="resource_name"
+            class="form-control"
+            placeholder="Resource Name"
+            required
+        >
+    </div>
+
+    <div class="col-md-5">
+        <input
+            type="text"
+            name="resource_type"
+            class="form-control"
+            placeholder="Type (room, instructor, equipment)"
+            required
+        >
+    </div>
+
+    <div class="col-md-2">
+        <button type="submit" class="btn btn-primary w-100">
+            Add
+        </button>
+    </div>
+</form>
+
+<h4 class="mb-3">All Resources</h4>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th style="width: 180px;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in resources %}
+        <tr>
+            <td>{{ r.resource_id }}</td>
+            <td>{{ r.resource_name }}</td>
+            <td>{{ r.resource_type }}</td>
+            <td class="d-flex gap-2">
+                <a
+                    href="/resources/edit/{{ r.resource_id }}"
+                    class="btn btn-sm btn-outline-primary"
+                >
+                    Edit
+                </a>
+
+                <form
+                    method="post"
+                    action="/resources/delete/{{ r.resource_id }}"
+                    onsubmit="return confirm('Are you sure you want to delete this resource?');"
+                >
+                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                        Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Allocate Resource{% endblock %}
+
+{% block content %}
+
+<h3 class="mb-4">Allocate Resource to Event</h3>
+
+{% if error %}
+<div class="alert alert-danger"><strong>{{ error }}</strong></div>
+{% endif %}
+
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Select Event</label>
+        <select name="event_id" class="form-select" required>
+            {% for e in events %}
+            <option value="{{ e.event_id }}">
+                {{ e.title }} ({{ e.start_time }} - {{ e.end_time }})
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">Select Resource</label>
+        <select name="resource_id" class="form-select" required>
+            {% for r in resources %}
+            <option value="{{ r.resource_id }}">
+                {{ r.resource_name }} ({{ r.resource_type }})
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-2 align-self-end">
+        <button type="submit" class="btn btn-warning w-100">Allocate</button>
+    </div>
+</form>
+
+{% endblock %}

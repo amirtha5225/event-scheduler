@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Resource Utilisation Report{% endblock %}
+
+{% block content %}
+
+<h3 class="mb-4">Resource Utilisation Report</h3>
+
+<form method="post" class="row g-3 mb-4">
+    <div class="col-md-4">
+        <label class="form-label">Start Date</label>
+        <input type="date" name="start_date" class="form-control" required>
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label">End Date</label>
+        <input type="date" name="end_date" class="form-control" required>
+    </div>
+
+    <div class="col-md-2 align-self-end d-flex gap-2">
+    <button type="submit" class="btn btn-info w-100">
+        Generate
+    </button>
+
+{% if request.method == "POST" %}
+<a href="/report/pdf?start_date={{ request.form.start_date }}&end_date={{ request.form.end_date }}"
+   class="btn btn-outline-secondary w-100">
+    Download PDF
+</a>
+{% else %}
+<button class="btn btn-outline-secondary w-100" disabled>
+    Download PDF
+</button>
+{% endif %}
+
+</div>
+
+</form>
+
+{% if report %}
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Resource</th>
+            <th>Total Hours</th>
+            <th>Upcoming Bookings</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in report %}
+        <tr>
+            <td>{{ r.resource }}</td>
+            <td>{{ r.hours }}</td>
+            <td>{{ r.upcoming }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

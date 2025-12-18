@@ -1,0 +1,22 @@
+body {
+    background-color: #f8f9fa;
+}
+
+h3, h4 {
+    font-weight: 600;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.table {
+    background-color: #ffffff;
+}
+
+.form-control,
+.form-select,
+.btn,
+.alert {
+    border-radius: 6px;
+}
